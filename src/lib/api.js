@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getGeocode = (keyword) => {
+export const getGeocode = (keyword) =>
   axios.get(`/map-geocode/v2/geocode`, {
     params: { query: keyword },
     headers: {
@@ -8,4 +8,3 @@ export const getGeocode = (keyword) => {
       "X-NCP-APIGW-API-KEY": process.env.REACT_APP_NCP_CLIENT_SECRET,
     },
   });
-};

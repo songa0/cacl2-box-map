@@ -12,10 +12,10 @@ export const getGeo = createAction(GET_GEO, (keyword) => keyword);
 function* getGeoSaga(action) {
   yield put(startLoading(GET_GEO));
   try {
-    const response = yield call(api.getGeocode, "강남구");
+    const response = yield call(api.getGeocode, "강서구");
     yield put({
       type: GET_GEO_SUCCESS,
-      payload: response,
+      payload: response.data,
     });
   } catch (e) {
     yield put({
@@ -32,6 +32,8 @@ export function* mapSaga() {
 }
 
 const initialState = {
+  lat: 37.5110621,
+  lng: 127.0355215,
   info: null,
 };
 
@@ -39,6 +41,8 @@ const map = handleActions(
   {
     [GET_GEO_SUCCESS]: (state, action) => ({
       ...state,
+      lat: action.payload.addresses[0].y,
+      lng: action.payload.addresses[0].x,
       info: action.payload,
     }),
   },
