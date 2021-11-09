@@ -4,7 +4,7 @@ import MapArea from "../components/MapArea/MapArea";
 import { getGeo } from "../modules/map";
 
 const MapAreaContainer = ({ getGeo, lat, lng }) => {
-  return <MapArea getGeo={getGeo} />;
+  return <MapArea getGeo={getGeo} lat={lat} lng={lng} />;
 };
 
 export default connect(({ map }) => ({ lat: map.lat, lng: map.lng }), {

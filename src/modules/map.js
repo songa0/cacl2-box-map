@@ -12,7 +12,7 @@ export const getGeo = createAction(GET_GEO, (keyword) => keyword);
 function* getGeoSaga(action) {
   yield put(startLoading(GET_GEO));
   try {
-    const response = yield call(api.getGeocode, "강서구");
+    const response = yield call(api.getGeocode, action.payload);
     yield put({
       type: GET_GEO_SUCCESS,
       payload: response.data,

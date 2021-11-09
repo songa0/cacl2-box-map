@@ -20,12 +20,13 @@ const SearchBtn = styled.button`
   border-radius: 10px;
 `;
 const SearchInput = styled.input`
-  height: 90%;
+  height: 85%;
   margin-right: 5px;
   outline: none;
   border: none;
   border-radius: 10px;
   flex: 1;
+  padding: 3px 10px;
 `;
 
 export default { SearchArea, SearchBtn, SearchInput };

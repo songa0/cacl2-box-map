@@ -1,15 +1,25 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { RenderAfterNavermapsLoaded } from "react-naver-maps";
 import { NaverMap } from "react-naver-maps";
 import Styled from "./MapArea.styled";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const MapArea = ({ getGeo }) => {
+const MapArea = ({ getGeo, lat, lng }) => {
+  const keyword = useRef();
+  let center;
   const onSubmit = (e) => {
     e.preventDefault();
-    getGeo();
+    getGeo(keyword.current.value);
   };
+
+  useEffect(() => {
+    const navermap = window.naver;
+    if (navermap) {
+      center = new navermap.maps.LatLng(lat, lng);
+    }
+  }, [lat, lng]);
+
   return (
     <>
       <RenderAfterNavermapsLoaded
@@ -17,7 +27,7 @@ const MapArea = ({ getGeo }) => {
         submodules={["geocoder"]}
       >
         <Styled.SearchArea onSubmit={onSubmit}>
-          <Styled.SearchInput />
+          <Styled.SearchInput ref={keyword} />
           <Styled.SearchBtn>
             <FontAwesomeIcon icon={faSearch} size="lg" />
           </Styled.SearchBtn>
@@ -25,7 +35,7 @@ const MapArea = ({ getGeo }) => {
         <NaverMap
           id="react-naver-maps-introduction"
           style={{ width: "100%", height: "100vh" }}
-          center={{ lat: 37.5110621, lng: 127.0355215 }}
+          center={center}
         ></NaverMap>
       </RenderAfterNavermapsLoaded>
     </>
