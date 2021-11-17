@@ -3,7 +3,7 @@ import styled from "styled-components";
 const SearchArea = styled.form`
   position: fixed;
   display: flex;
-  z-index: 1;
+  z-index: 1000;
   margin: 8px;
   height: 2.6rem;
   min-width: 30px;
