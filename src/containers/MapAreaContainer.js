@@ -1,12 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import MapArea from "../components/MapArea/MapArea";
-import { getGeo } from "../modules/map";
+import SearchArea from "../components/SearchArea/SearchArea";
 
-const MapAreaContainer = ({ getGeo, lat, lng }) => {
-  return <MapArea getGeo={getGeo} lat={lat} lng={lng} />;
+const MapAreaContainer = ({ lat, lng }) => {
+  return (
+    <>
+      <SearchArea />
+      <MapArea lat={lat} lng={lng} />
+    </>
+  );
 };
 
-export default connect(({ map }) => ({ lat: map.lat, lng: map.lng }), {
-  getGeo,
-})(MapAreaContainer);
+export default connect(
+  ({ map }) => ({ lat: map.lat, lng: map.lng }),
+  {}
+)(MapAreaContainer);
