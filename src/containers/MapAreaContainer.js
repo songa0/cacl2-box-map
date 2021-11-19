@@ -1,18 +1,19 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MapArea from "../components/MapArea/MapArea";
 import SearchArea from "../components/SearchArea/SearchArea";
+import { click } from "../modules/search";
 
-const MapAreaContainer = ({ lat, lng }) => {
+const MapAreaContainer = () => {
+  const keyword = useSelector((state) => state.search.keyword);
+  const dispatch = useDispatch();
+
   return (
     <>
-      <SearchArea />
-      <MapArea lat={lat} lng={lng} />
+      <SearchArea onClick={(input) => dispatch(click(input))} />
+      <MapArea keyword={keyword} />
     </>
   );
 };
 
-export default connect(
-  ({ map }) => ({ lat: map.lat, lng: map.lng }),
-  {}
-)(MapAreaContainer);
+export default React.memo(MapAreaContainer);

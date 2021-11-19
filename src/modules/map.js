@@ -34,6 +34,7 @@ export function* mapSaga() {
 const initialState = {
   lat: 37.5110621,
   lng: 127.0355215,
+  keyword: null,
   info: null,
 };
 

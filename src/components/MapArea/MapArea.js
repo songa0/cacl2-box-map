@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 const { kakao } = window;
 
-const MapArea = () => {
+const MapArea = ({ keyword }) => {
   useEffect(() => {
     const container = document.getElementById("map");
     const options = {
@@ -18,8 +18,8 @@ const MapArea = () => {
         map.panTo(center);
       }
     };
-    geocoder.addressSearch("강서", geoCallback);
-  }, []);
+    geocoder.addressSearch(keyword, geoCallback);
+  }, [keyword]);
 
   return (
     <>

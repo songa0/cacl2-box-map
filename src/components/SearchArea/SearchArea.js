@@ -3,10 +3,15 @@ import Styled from "./SearchArea.styled";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const SearchArea = () => {
+const SearchArea = ({ onClick }) => {
   const keyword = useRef();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onClick(keyword.current.value);
+  };
   return (
-    <Styled.SearchArea>
+    <Styled.SearchArea onSubmit={onSubmit}>
       <Styled.SearchInput ref={keyword} />
       <Styled.SearchBtn>
         <FontAwesomeIcon icon={faSearch} size="lg" />
