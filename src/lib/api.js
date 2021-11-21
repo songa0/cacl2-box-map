@@ -8,3 +8,8 @@ export const getGeocode = (keyword) =>
       "X-NCP-APIGW-API-KEY": process.env.REACT_APP_NCP_CLIENT_SECRET,
     },
   });
+
+export const getBoxLoc = () =>
+  axios.get(
+    `http://openAPI.seoul.go.kr:8088/${process.env.REACT_APP_DATA_APP_KEY}/json/ListSnowRemoveBox/1/5/`
+  );

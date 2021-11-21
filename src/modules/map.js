@@ -3,48 +3,44 @@ import { createAction, handleActions } from "redux-actions";
 import * as api from "../lib/api";
 import { finishLoading, startLoading } from "./loading";
 
-const GET_GEO = "map/GET_GEO";
-const GET_GEO_SUCCESS = "map/GET_GEO_SUCCESS";
-const GET_GEO_FAILURE = "map/GET_GEO_FAILURE";
+const GET_BOX = "map/GET_BOX";
+const GET_BOX_SUCCESS = "map/GET_BOX_SUCCESS";
+const GET_BOX_FAILURE = "map/GET_BOX_FAILURE";
 
-export const getGeo = createAction(GET_GEO, (keyword) => keyword);
+export const getBox = createAction(GET_BOX);
 
-function* getGeoSaga(action) {
-  yield put(startLoading(GET_GEO));
+function* getBoxSaga(action) {
+  yield put(startLoading(GET_BOX));
   try {
-    const response = yield call(api.getGeocode, action.payload);
+    const response = yield call(api.getBoxLoc);
+
     yield put({
-      type: GET_GEO_SUCCESS,
+      type: GET_BOX_SUCCESS,
       payload: response.data,
     });
   } catch (e) {
     yield put({
-      type: GET_GEO_FAILURE,
+      type: GET_BOX_FAILURE,
       payload: e,
       error: true,
     });
   }
-  yield put(finishLoading(GET_GEO));
+  yield put(finishLoading(GET_BOX));
 }
 
 export function* mapSaga() {
-  yield takeLatest(GET_GEO, getGeoSaga);
+  yield takeLatest(GET_BOX, getBoxSaga);
 }
 
 const initialState = {
-  lat: 37.5110621,
-  lng: 127.0355215,
-  keyword: null,
   info: null,
 };
 
 const map = handleActions(
   {
-    [GET_GEO_SUCCESS]: (state, action) => ({
+    [GET_BOX_SUCCESS]: (state, action) => ({
       ...state,
-      lat: action.payload.addresses[0].y,
-      lng: action.payload.addresses[0].x,
-      info: action.payload,
+      info: action.payload.ListSnowRemoveBox.row,
     }),
   },
   initialState
