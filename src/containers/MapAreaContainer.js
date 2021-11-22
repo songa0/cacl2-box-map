@@ -7,12 +7,17 @@ import { getBox } from "../modules/map";
 
 const MapAreaContainer = () => {
   const keyword = useSelector((state) => state.search.keyword);
+  const info = useSelector((state) => state.map.info);
   const dispatch = useDispatch();
 
   return (
     <>
       <SearchArea onClick={(input) => dispatch(click(input))} />
-      <MapArea keyword={keyword} getBox={() => dispatch(getBox())} />
+      <MapArea
+        keyword={keyword}
+        getBox={() => dispatch(getBox())}
+        info={info}
+      />
     </>
   );
 };

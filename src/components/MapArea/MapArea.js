@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 const { kakao } = window;
 
-const MapArea = ({ keyword, getBox }) => {
+const MapArea = ({ keyword, getBox, info }) => {
   useEffect(() => {
     const container = document.getElementById("map");
     const options = {
@@ -17,14 +17,28 @@ const MapArea = ({ keyword, getBox }) => {
         map.panTo(center);
       }
     };
-    if (keyword) {
-      geocoder.addressSearch(keyword, geoCallback);
-    }
+
+    if (keyword) geocoder.addressSearch(keyword, geoCallback);
   }, [keyword]);
 
   useEffect(() => {
     getBox();
-  }, [getBox]);
+  }, []);
+
+  useEffect(() => {
+    const positions = new Array();
+    if (!info) return;
+
+    for (let i = 0; i < info.length; i++) {
+      positions.push({
+        title: info[i].RM,
+        latlng: new kakao.maps.Coords(
+          info[i].G2_XMAX,
+          info[i].G2_YMAX
+        ).toLatLng(),
+      });
+    }
+  }, [info]);
 
   return (
     <>
