@@ -1,24 +1,23 @@
+import proj4 from "proj4";
 import React, { useEffect } from "react";
 const { kakao } = window;
 
 const MapArea = ({ keyword, getBox, info }) => {
   useEffect(() => {
-    const container = document.getElementById("map");
-    const options = {
-      center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
-      level: 3,
-    };
-    const map = new kakao.maps.Map(container, options);
-
-    const geocoder = new kakao.maps.services.Geocoder();
-    const geoCallback = (result, status) => {
-      if (status === kakao.maps.services.Status.OK) {
-        const center = new kakao.maps.LatLng(result[0].y, result[0].x);
-        map.panTo(center);
-      }
-    };
-
-    if (keyword) geocoder.addressSearch(keyword, geoCallback);
+    // const container = document.getElementById("map");
+    // const options = {
+    //   center: new kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
+    //   level: 3,
+    // };
+    // const map = new kakao.maps.Map(container, options);
+    // const geocoder = new kakao.maps.services.Geocoder();
+    // const geoCallback = (result, status) => {
+    //   if (status === kakao.maps.services.Status.OK) {
+    //     const center = new kakao.maps.LatLng(result[0].y, result[0].x);
+    //     map.panTo(center);
+    //   }
+    // };
+    // if (keyword) geocoder.addressSearch(keyword, geoCallback);
   }, [keyword]);
 
   useEffect(() => {
@@ -38,6 +37,13 @@ const MapArea = ({ keyword, getBox, info }) => {
         ).toLatLng(),
       });
     }
+
+    var grs80 =
+      "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs"; //행정안전부 오픈API 좌표계
+    var wgs84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; //WGS84
+    //console.log(proj4(grs80, wgs84, [553626.4, 198511.6]));
+
+    //console.log(p);
   }, [info]);
 
   return (
