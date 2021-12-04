@@ -39,9 +39,9 @@ const MapArea = ({ keyword, getBox, info }) => {
     }
 
     var grs80 =
-      "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs"; //행정안전부 오픈API 좌표계
+      "+proj=tmerc +lat_0=38 +lon_0=127 +k=1 +x_0=200000 +y_0=600000 +ellps=GRS80 +units=m +no_defs";
     var wgs84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; //WGS84
-    //console.log(proj4(grs80, wgs84, [553626.4, 198511.6]));
+    console.log(proj4(grs80, wgs84, [198511.6, 553626.4]));
 
     //console.log(p);
   }, [info]);
