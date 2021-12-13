@@ -11,5 +11,5 @@ export const getGeocode = (keyword) =>
 
 export const getBoxLoc = () =>
   axios.get(
-    `http://openAPI.seoul.go.kr:8088/${process.env.REACT_APP_DATA_APP_KEY}/json/ListSnowRemoveBox/1/10/`
+    `http://openAPI.seoul.go.kr:8088/${process.env.REACT_APP_DATA_APP_KEY}/json/ListSnowRemoveBox/1/1000/`
   );
